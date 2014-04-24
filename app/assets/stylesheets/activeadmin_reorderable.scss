@@ -1,0 +1,6 @@
+.aa-reorderable {
+  .reorder-handle {
+    @include light-button;
+    cursor: move;
+  }
+}
