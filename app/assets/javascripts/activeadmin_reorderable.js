@@ -1,7 +1,6 @@
 $.fn.reorderable = function(opts) {
   // This helper fixes the table row width collapsing when being dragged
   function reorderableTableHelper(e, ui) {
-    console.log(ui);
     ui.children().each(function() {
       var $cell = $(this);
 
