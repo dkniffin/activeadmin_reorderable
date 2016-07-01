@@ -21,7 +21,7 @@ This will produce an artifact named roughly
 You may bump into permissions issues if you have not been added as an
 owner on the gem. Consult the Viget development team for acess.
 
-### Reviews
+## Reviews
 
 All changes should be submitted through pull request. Ideally, at
 least two :+1:s should be given before a pull request is merge.
