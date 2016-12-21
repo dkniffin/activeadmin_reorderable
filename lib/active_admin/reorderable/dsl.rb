@@ -6,7 +6,7 @@ module ActiveAdmin
       def reorderable(&block)
         body = proc do
           resource.insert_at(params[:position].to_i)
-          render :nothing => true
+          head :ok
         end
 
         member_action(:reorder, :method => :post, &block || body)
