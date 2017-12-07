@@ -11,7 +11,8 @@ module ActiveAdmin
       private
 
       def reorder_handle_for(resource)
-        url = url_for([:reorder, active_admin_namespace.name, resource])
+        namespace = active_admin_namespace.name
+        url = namespace == :root ? url_for([:reorder, resource]) : url_for([:reorder, namespace, resource])
         span(reorder_handle_content, :class => 'reorder-handle', 'data-reorder-url' => url)
       end
 
