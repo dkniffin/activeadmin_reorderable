@@ -44,6 +44,7 @@ $.fn.reorderable = function (opts) {
     $rows.each(function () {
       $(this).find('.position').text(index($(this)));
     });
+    debugger
     var top_id = $row.prev().find('.reorder-handle').data("reorderId")
     var bottom_id = $row.next().find('.reorder-handle').data("reorderId")
 
