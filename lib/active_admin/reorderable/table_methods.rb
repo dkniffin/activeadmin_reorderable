@@ -16,7 +16,7 @@ module ActiveAdmin
 
         url = send([:reorder, aa_resource.route_prefix, instance_name, :path].join('_'), resource)
 
-        span(reorder_handle_content, :class => 'reorder-handle', 'data-reorder-url' => url)
+        span(reorder_handle_content, :class => 'reorder-handle', 'data-reorder-url' => url, 'data-reorder-id' => resource.id)
       end
 
       def reorder_handle_content
