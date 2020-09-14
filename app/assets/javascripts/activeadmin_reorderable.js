@@ -1,7 +1,7 @@
-$.fn.reorderable = function(opts) {
+$.fn.reorderable = function (opts) {
   // This helper fixes the table row width collapsing when being dragged
   function reorderableTableHelper(e, ui) {
-    ui.children().each(function() {
+    ui.children().each(function () {
       var $cell = $(this);
 
       $cell.width($cell.width());
@@ -18,16 +18,17 @@ $.fn.reorderable = function(opts) {
   }
 
   function reorderableTableStop(e, ui) {
-    var $row    = ui.item,
-        $rows   = $row.parent().children('tr'),
-        $table  = $row.closest('table'),
-        $handle = $row.find('.reorder-handle'),
-        url     = $handle.data('reorder-url'),
-        index   = function(i) { return $rows.index(i) + 1; };
+    var $row = ui.item,
+      $rows = $row.parent().children('tr'),
+      $table = $row.closest('table'),
+      $handle = $row.find('.reorder-handle'),
+      url = $handle.data('reorder-url'),
 
-    $table.find('tbody tr').each(function(index) {
-      var $row     = $(this),
-          newClass = ''
+      index = function (i) { return $rows.index(i) + 1; };
+
+    $table.find('tbody tr').each(function (index) {
+      var $row = $(this),
+        newClass = ''
 
       $row.removeClass('odd').removeClass('even');
 
@@ -40,27 +41,33 @@ $.fn.reorderable = function(opts) {
       $row.addClass(newClass);
     });
 
-    $rows.each(function() {
+    $rows.each(function () {
       $(this).find('.position').text(index($(this)));
     });
+    var top_id = $row.prev().find('.reorder-handle').data("reorderId")
+    var bottom_id = $row.next().find('.reorder-handle').data("reorderId")
 
-    $.post(url, { position: index($row) });
+    $.post(url, {
+      position: index($row),
+      top_id: top_id,
+      bottom_id: bottom_id 
+    });
   }
 
-  return this.each(function() {
+  return this.each(function () {
     var opts = $.extend({
-      items:  'tbody tr',
+      items: 'tbody tr',
       handle: '.reorder-handle',
-      axis:   'y',
+      axis: 'y',
       helper: reorderableTableHelper,
-      start:  reorderableTableStart,
-      stop:   reorderableTableStop,
+      start: reorderableTableStart,
+      stop: reorderableTableStop,
     }, opts || {});
 
     $(this).sortable(opts);
   });
 };
 
-$(function() {
+$(function () {
   $('.aa-reorderable').reorderable();
 });
