@@ -50,7 +50,7 @@ $.fn.reorderable = function (opts) {
     $.post(url, {
       position: index($row),
       top_id: top_id,
-      bottom_id: bottom_id
+      bottom_id: bottom_id 
     });
   }
 
