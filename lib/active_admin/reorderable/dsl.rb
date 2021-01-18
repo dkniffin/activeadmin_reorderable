@@ -5,7 +5,6 @@ module ActiveAdmin
 
       def reorderable(&block)
         body = proc do
-          byebug
           resource.insert_at(params[:position].to_i)
           head :ok
         end
