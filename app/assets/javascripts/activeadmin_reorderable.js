@@ -47,11 +47,36 @@ $.fn.reorderable = function (opts) {
     var top_id = $row.prev().find('.reorder-handle').data("reorderId")
     var bottom_id = $row.next().find('.reorder-handle').data("reorderId")
 
-    $.post(url, {
-      position: index($row),
-      top_id: top_id,
-      bottom_id: bottom_id 
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: {
+        position: index($row),
+        top_id: top_id,
+        bottom_id: bottom_id,
+      },
+      success: () => { onAjaxSuccess(e.target) },
+      error: () => { onAjaxError(e.target) },
     });
+  }
+
+  function onAjaxSuccess(table){
+    if(table.dataset.showFlashMessages !== "true") return;
+
+    var $message = document.createElement("div")
+    $message.innerHTML = "<div class='flash flash_notice'>Successfully reordered item.</div>"
+    var $flashes = document.querySelector(".flashes")
+    $flashes.innerHTML = ""
+    $flashes.append($message)
+  }
+
+  function onAjaxError(table){
+    if(table.dataset.showFlashMessages !== "true") return;
+
+    var $message = document.createElement("div")
+    $message.innerHTML = "<div class='flash flash_error'>Couldn't reorder item.</div>"
+    var $flashes = document.querySelector(".flashes")
+    $flashes.append($message)
   }
 
   return this.each(function () {
