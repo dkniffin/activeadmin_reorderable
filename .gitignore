@@ -1,3 +1,4 @@
 builds/*
 Gemfile.lock
 node_modules
+*.gem
