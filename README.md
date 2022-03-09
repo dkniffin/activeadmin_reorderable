@@ -8,9 +8,15 @@ Drag and drop to reorder your ActiveAdmin tables.
 Your resource classes must respond to `insert_at` ala the [`acts_as_list`](https://github.com/swanandp/acts_as_list) API. You don't need to use `acts_as_list`, but if you don't, make sure to define `insert_at`.
 
 ## Installation
+### Sprockets
 - Add `gem 'activeadmin_reorderable'` to `Gemfile`
 - Add `#= require activeadmin_reorderable` to `app/assets/javascripts/active_admin.js.coffee`
 - Add `@import "activeadmin_reorderable";` as the last `@import` statement in `app/assets/stylesheets/active_admin.css.scss`
+
+### Webpacker / npm
+- `npm install --save activeadmin_reorderable` or `yarn add activeadmin_reorderable`
+- Add `import "activeadmin_reorderable"` to your JS pack file
+- Add `@import "activeadmin_reorderable/app/assets/styleseehts/activeadmin_reorderable.scss"";` to your CSS style file
 
 ## Use
 `parts.rb`

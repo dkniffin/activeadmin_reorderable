@@ -1,0 +1,17 @@
+{
+  "name": "activeadmin_reorderable",
+  "version": "0.2.0",
+  "description": "Drag and drop to reorder your ActiveAdmin tables.",
+  "main": "app/assets/javascripts/activeadmin_reorderable.js",
+  "files": [
+    "app/**/*"
+  ],
+  "repository": "https://github.com/dkniffin/activeadmin_reorderable",
+  "author": "Viget <hello@viget.com>",
+  "license": "MIT",
+  "scripts": { },
+  "devDependencies": { },
+  "dependencies": {
+    "jquery": "^3.5.1"
+  }
+}
