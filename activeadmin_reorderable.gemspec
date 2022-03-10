@@ -5,9 +5,9 @@ require "activeadmin_reorderable/version"
 Gem::Specification.new do |s|
   s.name        = "activeadmin_reorderable"
   s.version     = ActiveadminReorderable::VERSION
-  s.authors     = ["Chris Jones", "Lawson Kurtz"]
-  s.email       = ["lawson.kurtz@viget.com"]
-  s.homepage    = "http://www.github.com/vigetlabs/activeadmin_reorderable"
+  s.authors     = ["Derek Kniffin", "Chris Jones", "Lawson Kurtz"]
+  s.email       = ["derek.kniffin@gmail.com"]
+  s.homepage    = "http://www.github.com/dkniffin/activeadmin_reorderable"
   s.summary     = "Drag and drop reordering for ActiveAdmin tables"
   s.description = "Add drag and drop reordering to ActiveAdmin tables."
   s.license     = "MIT"

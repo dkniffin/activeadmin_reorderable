@@ -19,7 +19,7 @@ This will produce an artifact named roughly
 `gem push activeadmin_reorderable-<version>.gem`
 
 You may bump into permissions issues if you have not been added as an
-owner on the gem. Consult the Viget development team for acess.
+owner on the gem.
 
 ## Reviews
 
