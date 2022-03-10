@@ -87,3 +87,5 @@ Update the npm package:
 Tag the version in git:
 - `git tag X.Y.Z`
 - `git push origin X.Y.Z`
+
+Update the changelog
