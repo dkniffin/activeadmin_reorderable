@@ -11,10 +11,8 @@ module ActiveAdmin
       private
 
       def reorder_handle_for(resource)
-        aa_resource   = active_admin_namespace.resource_for(resource.class)
-        instance_name = aa_resource.resources_configuration[:self][:route_instance_name]
-
-        url = send([:reorder, aa_resource.route_prefix, instance_name, :path].join('_'), resource)
+        aa_resource = active_admin_namespace.resource_for(resource.class)
+        url = aa_resource.route_member_action_path(:reorder, resource)
 
         span(reorder_handle_content, :class => 'reorder-handle', 'data-reorder-url' => url, 'data-reorder-id' => resource.id)
       end
@@ -28,4 +26,3 @@ module ActiveAdmin
     ::ActiveAdmin::Views::TableFor.send(:include, TableMethods)
   end
 end
-
