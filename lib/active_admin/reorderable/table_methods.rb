@@ -14,7 +14,7 @@ module ActiveAdmin
         aa_resource = active_admin_namespace.resource_for(resource.class)
         url = aa_resource.route_member_action_path(:reorder, resource)
 
-        span(reorder_handle_content, :class => 'reorder-handle', 'data-reorder-url' => url, 'data-reorder-id' => resource.id)
+        span(reorder_handle_content, :class => 'reorder-handle', 'data-reorder-url' => url)
       end
 
       def reorder_handle_content
