@@ -1,73 +1,102 @@
-$.fn.reorderable = function (opts) {
-  // This helper fixes the table row width collapsing when being dragged
-  function reorderableTableHelper(e, ui) {
-    ui.children().each(function () {
-      var $cell = $(this);
+const setupReorderable = ({ table, onUpdate }) => {
+  const rows = table.getElementsByTagName('tbody')[0].rows
 
-      $cell.width($cell.width());
-    });
+  let dragSrc = null
 
-    return ui;
-  }
+  for (var i = 0; i < rows.length; i++) {
+    const row = rows[i]
+    const handle = row.querySelector(".reorder-handle")
 
-  // This helper sets the table row placeholder height to the height of the row being moved
-  function reorderableTableStart(e, ui) {
-    ui.placeholder.height(ui.helper.outerHeight());
+    // Add draggable only when the handle is clicked, to prevent dragging from the rest of the row
+    handle.addEventListener("mousedown", () => row.setAttribute("draggable", "true"))
+    handle.addEventListener("mouseup", () => row.setAttribute("draggable", "false"))
 
-    return ui;
-  }
+    row.addEventListener("dragstart", (e) => {
+      e.dataTransfer.effectAllowed = "move"
 
-  function reorderableTableStop(e, ui) {
-    var $row = ui.item,
-      $rows = $row.parent().children('tr'),
-      $table = $row.closest('table'),
-      $handle = $row.find('.reorder-handle'),
-      url = $handle.data('reorder-url'),
+      dragSrc = row
 
-      index = function (i) { return $rows.index(i) + 1; };
+      // Apply styling a millisecond later, so the dragging image shows up correctly
+      setTimeout(() => { row.classList.add("dragged-row") }, 1)
+    })
 
-    $table.find('tbody tr').each(function (index) {
-      var $row = $(this),
-        newClass = ''
+    row.addEventListener("dragover", (e) => {
+      e.preventDefault()
+      e.dataTransfer.dropEffect = "move"
 
-      $row.removeClass('odd').removeClass('even');
+      // If dragged to a new location, move the dragged row
+      if (dragSrc != row) {
+        const sourceIndex = dragSrc.rowIndex
+        const targetIndex = row.rowIndex
 
-      if ((index + 1) % 2 == 0) {
-        newClass = 'even';
-      } else {
-        newClass = 'odd';
+        if (sourceIndex < targetIndex) {
+          table.tBodies[0].insertBefore(dragSrc, row.nextSibling)
+        } else {
+          table.tBodies[0].insertBefore(dragSrc, row)
+        }
+        onUpdate(dragSrc)
       }
+    })
 
-      $row.addClass(newClass);
-    });
+    row.addEventListener("dragend", () => {
+      // Disable dragging, so only the handle can start the dragging again
+      row.setAttribute("draggable", "false")
+      row.classList.remove("dragged-row")
+      dragSrc = null
+    })
+  }
+}
 
-    $rows.each(function () {
-      $(this).find('.position').text(index($(this)));
-    });
-    var top_id = $row.prev().find('.reorder-handle').data("reorderId")
-    var bottom_id = $row.next().find('.reorder-handle').data("reorderId")
+const updateEvenOddClasses = (row, index) => {
+  row.classList.remove("odd")
+  row.classList.remove("even")
 
-    $.post(url, {
-      position: index($row),
-      top_id: top_id,
-      bottom_id: bottom_id
-    });
+  if ((index + 1) % 2 == 0) {
+    row.classList.add("even")
+  } else {
+    row.classList.add("odd")
+  }
+}
+
+const updatePositionText = (row, index) => {
+  row.querySelector(".position").textContent = index
+}
+
+const updateBackend = (url, rowIndex) => {
+  let headers = { }
+
+  const csrfElement = document.querySelector("meta[name=csrf-token]")
+  if (csrfElement) {
+    headers["X-CSRF-Token"] = csrfElement.getAttribute("content")
+  } else {
+    console.warn("Rails CSRF element not present. AJAX requests may fail due to CORS issues.")
   }
 
-  return this.each(function () {
-    var opts = $.extend({
-      items: 'tbody tr',
-      handle: '.reorder-handle',
-      axis: 'y',
-      helper: reorderableTableHelper,
-      start: reorderableTableStart,
-      stop: reorderableTableStop,
-    }, opts || {});
+  const formData = new FormData()
+  formData.append("position", rowIndex)
 
-    $(this).sortable(opts);
-  });
-};
+  fetch(url, { method: "POST", headers, body: formData })
+}
 
-$(function () {
-  $('.aa-reorderable').reorderable();
-});
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".aa-reorderable").forEach((table) => {
+    setupReorderable({
+      table,
+      onUpdate: (row) => {
+        const allRows = table.getElementsByTagName('tbody')[0].rows
+        const handle = row.querySelector(".reorder-handle")
+        const url = handle.dataset["reorderUrl"]
+        const rowIndex = Array.prototype.indexOf.call(allRows, row)
+
+        for (var i = 0; i < allRows.length; i++) {
+          const loopRow = allRows[i]
+          const index = i + 1
+          updateEvenOddClasses(loopRow, index)
+          updatePositionText(loopRow, index)
+        }
+
+        updateBackend(url, rowIndex + 1)
+      }
+    })
+  })
+})

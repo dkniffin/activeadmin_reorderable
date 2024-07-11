@@ -30,7 +30,7 @@ describe "Reorderable", type: :feature do
     expect(item1.reload.position).to eq(1)
     expect(item2.reload.position).to eq(2)
 
-    row1.find(".ui-sortable-handle").drag_by(0, 50) # Drag down 50, far enough to put it in the next row
+    row1.find(".reorder-handle").drag_by(0, 50) # Drag down 50, far enough to put it in the next row
 
     expect(item2.name).to appear_before(item1.name)
 
