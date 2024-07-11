@@ -9,6 +9,7 @@ ActiveAdmin.register ItemQueue do
     reorderable_table_for item_queue.items do
       column :name
       column :description
+      column :position, class: "position"
     end
   end
 end
