@@ -34,6 +34,10 @@ describe "Reorderable", type: :feature do
 
     expect(item2.name).to appear_before(item1.name)
 
+    # Check that the position column updated immediately
+    expect(row1.find(".position")).to have_content("2")
+    expect(row2.find(".position")).to have_content("1")
+
     sleep 1 # Give some time for the DB to update
 
     expect(item1.reload.position).to eq(2)
