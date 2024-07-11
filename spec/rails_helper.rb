@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require File.expand_path('dummy/config/environment', __dir__)
 require 'rspec/rails'
+require 'pry'
 require 'factory_bot_rails'
 require 'capybara/rspec'
 require 'capybara/rails'
@@ -30,10 +31,6 @@ RSpec.configure do |config|
 
   config.after do
     DatabaseCleaner.clean
-  end
-
-  config.around :each, :js do |ex|
-    ex.run_with_retry retry: 3
   end
 
   Capybara.register_driver :chrome do |app|
