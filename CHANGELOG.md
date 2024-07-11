@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0
+
+- Add tests, using dummy Rails app
+- Rewrite JS using vanilla JS
+- Remove jQuery dependency
+
 ## 0.2.1
 
 - Update to be compatible with webpacker / npm
