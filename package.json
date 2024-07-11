@@ -1,6 +1,6 @@
 {
   "name": "activeadmin_reorderable",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Drag and drop to reorder your ActiveAdmin tables.",
   "main": "app/assets/javascripts/activeadmin_reorderable.js",
   "files": [
