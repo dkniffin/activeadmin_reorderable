@@ -2,3 +2,11 @@ builds/*
 Gemfile.lock
 node_modules
 *.gem
+spec/dummy/db/*.sqlite3
+spec/dummy/db/*.sqlite3-journal
+spec/dummy/log/*.log
+spec/dummy/tmp/
+spec/dummy/.sass-cache
+spec/dummy/public/system
+spec/dummy/public/packs-test
+spec/dummy/public/packs

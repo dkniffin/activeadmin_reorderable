@@ -1,0 +1,2 @@
+class ItemQueue < ApplicationRecord
+end
