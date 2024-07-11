@@ -3,4 +3,8 @@
     @include light-button;
     cursor: move;
   }
+
+  .dragged-row {
+    opacity: 0;
+  }
 }
