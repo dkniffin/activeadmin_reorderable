@@ -2,26 +2,44 @@
 
 Thank you for considering a contribution to this project!
 
-## Deployment
+## Create an issue
 
-`activeadmin_reorderable` is published on http://rubygems.org. The
-following steps are necessary to push a new version:
+If you find an issue, or you'd like to request a new feature, [open a github issue](https://github.com/dkniffin/activeadmin_reorderable/issues/new).
 
-### Build the gem
+## Submit a pull request
 
-`gem build activeadmin_reorderable.gemspec`
+If you know how to make the change, please submit a pull request (PR). This makes it much easier to
+accept the change
 
-This will produce an artifact named roughly
-`activeadmin_reorderable-<version>.gem`.
+1. Fork it ( https://github.com/[my-github-username]/activeadmin_reorderable/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am "Add some feature"`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
 
-### Publish the gem
+In order for the PR to be merged, the test suite must pass, there must be no conflicts on the
+merge, and it must be merged by a maintainer.
 
-`gem push activeadmin_reorderable-<version>.gem`
+## Issue and PR reviews
 
-You may bump into permissions issues if you have not been added as an
-owner on the gem.
+Another way you can help is by reviewing issues, trying to reproduce bugs, and providing feedback on PRs.
 
-## Reviews
+## Pushing a new version
 
-All changes should be submitted through pull request. Ideally, at
-least two :+1:s should be given before a pull request is merge.
+First, you must be authorized on both rubygems.org and npmjs.com. Then:
+
+1. Update the ruby gem:
+  - Update the version in `lib/activeadmin_reorderable/version.rb`
+  - `gem build activeadmin_reorderable.gemspec`
+  - `gem push activeadmin_reorderable-X.Y.Z.gem`
+
+2. Update the npm package:
+  - Update the version in `package.json`
+  - `npm publish`
+
+3. Update the changelog.
+
+4. Tag the version in git:
+  - `git tag X.Y.Z`
+  - Add the same text as the changelog to the tag description
+  - `git push origin X.Y.Z`
