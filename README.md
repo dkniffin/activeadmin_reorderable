@@ -8,6 +8,14 @@ Drag and drop to reorder your ActiveAdmin tables.
 Your resource classes must respond to `insert_at` ala the [`acts_as_list`](https://github.com/swanandp/acts_as_list) API. You don't need to use `acts_as_list`, but if you don't, make sure to define `insert_at`.
 
 ## Installation
+### Importmap
+
+- Add `gem 'activeadmin_reorderable'` to `Gemfile` and run `bundle install`
+- Add `import "activeadmin_reorderable"` to JS entrypoint (a JS file that is included for activeadmin)
+- Add `@import "activeadmin_reorderable";` in your CSS style file
+
+NOTE: no need to pin the import in your application. That's handled internally by the gem.
+
 ### Sprockets
 - Add `gem 'activeadmin_reorderable'` to `Gemfile` and run `bundle install`
 - Add `#= require activeadmin_reorderable` to `app/assets/javascripts/active_admin.js.coffee`
@@ -61,31 +69,4 @@ end
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/activeadmin_reorderable/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am "Add some feature"`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
-
-### Issue and PR reviews
-
-Another way you can help is by reviewing issues, trying to reproduce bugs, and providing feedback on PRs.
-
-## Pushing a new version
-
-First, you must be authorized on both rubygems.org and npmjs.com. Then:
-
-Update the ruby gem:
-- Update the version in `lib/activeadmin_reorderable/version.rb`
-- `gem build activeadmin_reorderable.gemspec`
-- `gem push activeadmin_reorderable-X.Y.Z.gem`
-
-Update the npm package:
-- Update the version in `package.json`
-- `npm publish`
-
-Tag the version in git:
-- `git tag X.Y.Z`
-- `git push origin X.Y.Z`
-
-Update the changelog
+See [CONTRIBUTING.md](./CONTRIBUTING.md)
