@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rails", "~> 6.1", ">= 6.1.4.4"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "selenium-webdriver", '~> 4.10'
-  s.add_development_dependency "site_prism"
   s.add_development_dependency "sqlite3", "~> 1.4"
   s.add_development_dependency "sassc-rails"
 end
