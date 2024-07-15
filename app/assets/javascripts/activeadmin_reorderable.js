@@ -59,7 +59,10 @@ const updateEvenOddClasses = (row, index) => {
 }
 
 const updatePositionText = (row, index) => {
-  row.querySelector(".position").textContent = index
+  const position = row.querySelector(".position")
+  if (position) {
+    position.textContent = index
+  }
 }
 
 const updateBackend = (url, rowIndex) => {
@@ -79,7 +82,7 @@ const updateBackend = (url, rowIndex) => {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".aa-reorderable").forEach((table) => {
+  document.querySelectorAll("table.aa-reorderable").forEach((table) => {
     setupReorderable({
       table,
       onUpdate: (row) => {
