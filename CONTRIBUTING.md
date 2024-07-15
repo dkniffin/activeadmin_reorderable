@@ -40,6 +40,6 @@ First, you must be authorized on both rubygems.org and npmjs.com. Then:
 3. Update the changelog.
 
 4. Tag the version in git:
-  - `git tag X.Y.Z`
+  - `git tag -a X.Y.Z`
   - Add the same text as the changelog to the tag description
   - `git push origin X.Y.Z`
