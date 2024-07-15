@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1
+
+- Fix some JS errors reported in #28 - Thanks @dramalho
+
 ## 0.3.0
 
 - Add tests, using dummy Rails app
