@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2
+
+- Change backend update from dragover to dragend
+
 ## 0.3.1
 
 - Fix some JS errors reported in #28 - Thanks @dramalho
