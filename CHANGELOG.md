@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.3
+
+- Update included files in gemspec
+
 ## 0.3.2
 
 - Change backend update from dragover to dragend
