@@ -1,7 +1,8 @@
-const setupReorderable = ({ table, onUpdate }) => {
+const setupReorderable = ({ table, onDragover, onDragEnd }) => {
   const rows = table.getElementsByTagName('tbody')[0].rows
 
   let dragSrc = null
+  let srcIndex = null
 
   for (var i = 0; i < rows.length; i++) {
     const row = rows[i]
@@ -15,6 +16,7 @@ const setupReorderable = ({ table, onUpdate }) => {
       e.dataTransfer.effectAllowed = "move"
 
       dragSrc = row
+      srcIndex = row.rowIndex
 
       // Apply styling a millisecond later, so the dragging image shows up correctly
       setTimeout(() => { row.classList.add("dragged-row") }, 1)
@@ -34,7 +36,7 @@ const setupReorderable = ({ table, onUpdate }) => {
         } else {
           table.tBodies[0].insertBefore(dragSrc, row)
         }
-        onUpdate(dragSrc)
+        onDragover(dragSrc)
       }
     })
 
@@ -42,7 +44,13 @@ const setupReorderable = ({ table, onUpdate }) => {
       // Disable dragging, so only the handle can start the dragging again
       row.setAttribute("draggable", "false")
       row.classList.remove("dragged-row")
+
+      if (srcIndex != row.rowIndex) {
+        onDragEnd(dragSrc)
+      }
+
       dragSrc = null
+      srcIndex = null
     })
   }
 }
@@ -85,11 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("table.aa-reorderable").forEach((table) => {
     setupReorderable({
       table,
-      onUpdate: (row) => {
+      onDragover: (_row) => {
         const allRows = table.getElementsByTagName('tbody')[0].rows
-        const handle = row.querySelector(".reorder-handle")
-        const url = handle.dataset["reorderUrl"]
-        const rowIndex = Array.prototype.indexOf.call(allRows, row)
 
         for (var i = 0; i < allRows.length; i++) {
           const loopRow = allRows[i]
@@ -97,6 +102,12 @@ document.addEventListener("DOMContentLoaded", () => {
           updateEvenOddClasses(loopRow, index)
           updatePositionText(loopRow, index)
         }
+      },
+      onDragEnd: (row) => {
+        const handle = row.querySelector(".reorder-handle")
+        const url = handle.dataset["reorderUrl"]
+        const allRows = table.getElementsByTagName('tbody')[0].rows
+        const rowIndex = Array.prototype.indexOf.call(allRows, row)
 
         updateBackend(url, rowIndex + 1)
       }
