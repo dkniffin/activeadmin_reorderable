@@ -1,7 +1,10 @@
+@use "@activeadmin/activeadmin/src/scss/mixins/all" as *;
+
 .aa-reorderable {
   .reorder-handle {
-    @include light-button;
     cursor: move;
+
+    @include light-button;
   }
 
   .dragged-row {

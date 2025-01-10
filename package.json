@@ -11,5 +11,7 @@
   "license": "MIT",
   "scripts": { },
   "devDependencies": { },
-  "dependencies": { }
+  "dependencies": {
+    "@activeadmin/activeadmin": "^3.2.0"
+  }
 }
