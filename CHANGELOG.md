@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.4
+
+- Update sass to use @use instead of @import, to resolve deprecation warnings in dartsass
+
 ## 0.3.3
 
 - Update included files in gemspec
