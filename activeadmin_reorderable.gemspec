@@ -26,4 +26,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "selenium-webdriver", '~> 4.10'
   s.add_development_dependency "sqlite3", "~> 1.4"
   s.add_development_dependency "sassc-rails"
+  s.add_development_dependency "concurrent-ruby", "1.3.4"
 end
